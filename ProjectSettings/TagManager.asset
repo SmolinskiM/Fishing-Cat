@@ -8,8 +8,8 @@ TagManager:
   - Hook
   - Fish
   - Red
-  - Yellow
   - Green
+  - Undefined
   layers:
   - Default
   - TransparentFX
