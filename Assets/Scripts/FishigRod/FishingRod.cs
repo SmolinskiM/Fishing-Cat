@@ -68,7 +68,7 @@ public class FishingRod : MonoBehaviour
             {
                 if (hook.baitSize == 0)
                 {
-                    hook.baitSize = 1;
+                    hook.baitSize = hook.baitSizeStart;
                 }
                 TrowHook(Time.time - pressTimeStart);
                 pressTimeStart = 0;

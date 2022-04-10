@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeepingFishOnHook : MonoBehaviour
+public class FishUI : MonoBehaviour
 {
     [SerializeField] private Hook hook;
 
@@ -15,6 +15,7 @@ public class KeepingFishOnHook : MonoBehaviour
             fishMovment = hook.GetComponentInChildren<FishMovment>();
             hook.isFishOnHook = false;
             fishMovment.isFishOnHook = false;
+            fishMovment.transform.eulerAngles = Vector3.zero;
             fishMovment.transform.parent = fishMovment.area;
         }
     }

@@ -7,6 +7,7 @@ public class Hook : MonoBehaviour
     public bool isFishOnHook;
     public bool isHookInWater;
     public int baitSize;
+    public int baitSizeStart;
 
     public FishingRod fishingRod;
     public DistanceJoint2D joint;
