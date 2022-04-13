@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
+    [SerializeField] private Text upgradePrice;
     [SerializeField] private Upgrades upgrades;
 
     [SerializeField] private Image[] levelCout;
+
+    private void Start()
+    {
+        upgradePrice.text = upgrades.price.ToString() + "$";
+    }
 
     void Update()
     {

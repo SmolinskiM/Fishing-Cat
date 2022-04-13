@@ -47,6 +47,7 @@ public class FightWithFish : MonoBehaviour
             cooldown = Time.time + 2;
             selectTarget = Random.Range(0, 2);
         }
+
         if (selectTarget == 0)
         {
             fishRT.position = Vector2.MoveTowards(fishUI.transform.position, targetL.position, 100 * Time.deltaTime);

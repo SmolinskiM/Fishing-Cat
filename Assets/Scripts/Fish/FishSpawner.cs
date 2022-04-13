@@ -30,7 +30,7 @@ public class FishSpawner : MonoBehaviour
     void FishSetup(GameObject fishNew, int fishRandom)
     {
         fishNew.transform.parent = gameObject.transform;
-        fishMovment = fishPrefab.GetComponent<FishMovment>();
+        fishMovment = fishNew.GetComponent<FishMovment>();
         fishMovment.fishId = fish[fishRandom].fishId;
         fishMovment.fishId = fish[fishRandom].fishId;
         fishMovment.fishSize = fish[fishRandom].fishSize;
