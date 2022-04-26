@@ -5,6 +5,7 @@ public class CatchingFish: MonoBehaviour
 {   
     private FishMovment fish;
     private FishingRod fishingRod;
+
     [SerializeField] private Canvas whatToDoWithFish;
     [SerializeField] private Text moneyText;
 
@@ -39,6 +40,7 @@ public class CatchingFish: MonoBehaviour
         fishingRod.money += fish.value;
         moneyText.text = fishingRod.money.ToString() + "$";
         fishingRod.hook.isFishOnHook = false;
+        fish.fish.isDiscovered = true;
         Destroy(fish.gameObject);
     }
 
@@ -47,6 +49,7 @@ public class CatchingFish: MonoBehaviour
         fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovment>();
         fishingRod.hook.baitSize = fish.fishSize + 1;
         fishingRod.hook.isFishOnHook = false;
+        fish.fish.isDiscovered = true;
         Destroy(fish.gameObject);
     }
 }

@@ -46,7 +46,6 @@ public class Hook : MonoBehaviour
     {
         if (collision.CompareTag("Water"))
         {
-            rb.mass = 0.5f;
             isHookInWater = true;
         }
     }
@@ -55,7 +54,6 @@ public class Hook : MonoBehaviour
         if (collision.CompareTag("Water"))
         {
             transform.position = positionRod.position;
-            rb.mass = 1;
             rb.gravityScale = 0;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             rb.constraints = RigidbodyConstraints2D.None;

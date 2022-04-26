@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class FishMovment : MonoBehaviour
 {
-    public Vector2 target { get; private set; }
-    public GameObject hookGo { get; private set; }
+    public Vector2 Target { get; private set; }
+    public GameObject HookGo { get; private set; }
     
     public bool isFishOnHook;
-    
     public int fishId;
     public int fishSize;
     public int value;
     public int range;
 
+    public Fish fish;
     public Transform area;
+    
     private bool isReachPoint = true;
     
     private float positionX;
@@ -26,9 +27,9 @@ public class FishMovment : MonoBehaviour
     void Start()
     {
         ofset = new Vector3(0.14f, -1.1f, 0);
-        hookGo = GameObject.FindGameObjectWithTag("Hook");
+        HookGo = GameObject.FindGameObjectWithTag("Hook");
         area = transform.parent;
-        hook = hookGo.GetComponent<Hook>();
+        hook = HookGo.GetComponent<Hook>();
     }
 
     void Update()
@@ -54,14 +55,14 @@ public class FishMovment : MonoBehaviour
 
         if(distanceToBait <= range && hook.baitSize != 0 && hook.isHookInWater)
         {
-            target = hookGo.transform.position;
+            Target = HookGo.transform.position;
         }
         else
         {
-            target = new Vector2(positionX, positionY);
+            Target = new Vector2(positionX, positionY);
         }
 
-        PointToFishTravel(target);
+        PointToFishTravel(Target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,8 +71,8 @@ public class FishMovment : MonoBehaviour
         {
             if (hook.baitSize >= fishSize)
             {
-                transform.parent = hookGo.transform;
-                transform.position = hookGo.transform.position + ofset;
+                transform.parent = HookGo.transform;
+                transform.position = HookGo.transform.position + ofset;
                 hook.isFishOnHook = true;
                 isFishOnHook = true;
             }
@@ -84,4 +85,3 @@ public class FishMovment : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target, 10 * Time.deltaTime);
     }
 }
-

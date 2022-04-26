@@ -22,7 +22,7 @@ public class FishSpawner : MonoBehaviour
             float positionX = Random.Range(gameObject.transform.position.x - gameObject.transform.localScale.x / 2, gameObject.transform.position.x + gameObject.transform.localScale.x / 2);
             float positionY = Random.Range(gameObject.transform.position.y - gameObject.transform.localScale.y / 2, gameObject.transform.position.y + gameObject.transform.localScale.y / 2);
             int fishRandom = Random.Range(0, fish.Length);
-            GameObject fishNew = Instantiate(fishPrefab, new Vector3(positionX, positionY, -20), Quaternion.identity);
+            GameObject fishNew = Instantiate(fishPrefab, new Vector3(positionX, positionY, 0), Quaternion.identity);
             FishSetup(fishNew, fishRandom);
         }
     }
@@ -36,6 +36,7 @@ public class FishSpawner : MonoBehaviour
         fishMovment.fishSize = fish[fishRandom].fishSize;
         fishMovment.value = fish[fishRandom].value;
         fishMovment.range = fish[fishRandom].range;
+        fishMovment.fish = fish[fishRandom];
 
         fishNew.GetComponent<SpriteRenderer>().sprite = fish[fishRandom].fishSprite;
     }

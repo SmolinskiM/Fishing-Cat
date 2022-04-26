@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd404f95c36a194c8b8387eea0b4dfb, type: 3}
   m_Name: Mustardfish
   m_EditorClassIdentifier: 
+  isDiscovered: 0
   fishId: 2
   fishSize: 2
   value: 50
