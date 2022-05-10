@@ -8,10 +8,6 @@ public class FishMovment : MonoBehaviour
     public GameObject HookGo { get; private set; }
     
     public bool isFishOnHook;
-    public int fishId;
-    public int fishSize;
-    public int value;
-    public int range;
 
     public Fish fish;
     public Transform area;
@@ -53,7 +49,7 @@ public class FishMovment : MonoBehaviour
             return;
         }
 
-        if(distanceToBait <= range && hook.baitSize != 0 && hook.isHookInWater)
+        if(distanceToBait <= fish.range && hook.baitSize != 0 && hook.isHookInWater)
         {
             Target = HookGo.transform.position;
         }
@@ -69,7 +65,7 @@ public class FishMovment : MonoBehaviour
     {
         if (collision.CompareTag("Hook"))
         {
-            if (hook.baitSize >= fishSize)
+            if (hook.baitSize >= fish.fishSize)
             {
                 transform.parent = HookGo.transform;
                 transform.position = HookGo.transform.position + ofset;

@@ -37,7 +37,7 @@ public class CatchingFish: MonoBehaviour
     public void SellFish()
     {
         fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovment>();
-        fishingRod.money += fish.value;
+        fishingRod.money += fish.fish.value;
         moneyText.text = fishingRod.money.ToString() + "$";
         fishingRod.hook.isFishOnHook = false;
         fish.fish.isDiscovered = true;
@@ -47,7 +47,7 @@ public class CatchingFish: MonoBehaviour
     public void MakeBait()
     {
         fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovment>();
-        fishingRod.hook.baitSize = fish.fishSize + 1;
+        fishingRod.hook.baitSize = fish.fish.fishSize + 1;
         fishingRod.hook.isFishOnHook = false;
         fish.fish.isDiscovered = true;
         Destroy(fish.gameObject);

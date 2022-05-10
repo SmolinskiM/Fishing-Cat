@@ -26,6 +26,7 @@ public class Slot : MonoBehaviour
             fishValue.text = fish.value.ToString() + "$";
             fishSprite.sprite = fish.fishSprite;
             fishSprite.color = Color.white;
+            Destroy(GetComponent<Slot>());
         }
     }
 }

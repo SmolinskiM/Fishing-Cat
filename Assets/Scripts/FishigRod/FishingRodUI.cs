@@ -20,7 +20,7 @@ public class FishingRodUI : MonoBehaviour
             powerBarCanvas.SetActive(true);
         }
 
-        powerBar.value = (Time.time - fishingRod.pressTimeStart) / fishingRod.maxPower;
+        powerBar.value = (Time.time - fishingRod.PressTimeStart) / fishingRod.MaxPower;
 
     }
 }

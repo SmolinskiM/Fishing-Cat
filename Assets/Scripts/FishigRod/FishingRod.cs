@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FishingRod : MonoBehaviour
 {
-    public float maxPower { get; private set; }
-    public float pressTimeStart { get; private set; }
+    public float MaxPower { get; private set; }
+    public float PressTimeStart { get; private set; }
     
     public bool isHookOnRod;
     public bool isThrowable;
@@ -20,8 +20,9 @@ public class FishingRod : MonoBehaviour
     
     [SerializeField] private Transform pointRod;
     [SerializeField] private Transform pointHook;
-    [SerializeField] private ShopOpen shopOpen;
     [SerializeField] private Money moneyBag;
+    [SerializeField] private ShopOpen shopOpen;
+    [SerializeField] private CatalogMeneger catalogMeneger;
 
 
     [SerializeField] private Rigidbody2D hookRb;
@@ -35,7 +36,7 @@ public class FishingRod : MonoBehaviour
     void Start()
     {
         isHookOnRod = true;
-        maxPower = 5;
+        MaxPower = 5;
     }
 
     void Update()
@@ -54,6 +55,13 @@ public class FishingRod : MonoBehaviour
     {
         if(shopOpen.isShopOpen)
         {
+            isThrowable = false;
+            return;
+        }
+
+        if(catalogMeneger.isEnableToOpen)
+        {
+            isThrowable = false;
             return;
         }
 
@@ -61,7 +69,7 @@ public class FishingRod : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                pressTimeStart = Time.time;
+                PressTimeStart = Time.time;
                 isThrowable = true;
             }
             else if (Input.GetKeyUp(KeyCode.Mouse0) && isThrowable)
@@ -70,8 +78,8 @@ public class FishingRod : MonoBehaviour
                 {
                     hook.baitSize = hook.baitSizeStart;
                 }
-                TrowHook(Time.time - pressTimeStart);
-                pressTimeStart = 0;
+                TrowHook(Time.time - PressTimeStart);
+                PressTimeStart = 0;
                 isThrowable = false;
                 isHookOnRod = false;
             }
@@ -80,11 +88,11 @@ public class FishingRod : MonoBehaviour
 
     void TrowHook(float power)
     {
-        if (power > maxPower)
+        if (power > MaxPower)
         {
-            power = maxPower;
+            power = MaxPower;
         }
-        hook.joint.distance = (power / maxPower) * maxDistance;
+        hook.joint.distance = (power / MaxPower) * maxDistance;
 
         if(hook.joint.distance < 4)
         {
