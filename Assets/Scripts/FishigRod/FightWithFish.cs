@@ -6,13 +6,13 @@ public class FightWithFish : MonoBehaviour
     [SerializeField] private Canvas fightCanvas;
     [SerializeField] private GameObject fishingWhell;
     [SerializeField] private Transform fishUI;
-    [SerializeField] private Transform targetL;
-    [SerializeField] private Transform targetR;
+    [SerializeField] private Transform[] target;
     [SerializeField] private RectTransform fishDeafultPoint;
 
 
     private int selectTarget;
     private float cooldown;
+    private float moveSpeed;
     private RectTransform fishRT;
 
     private void Start()
@@ -29,7 +29,7 @@ public class FightWithFish : MonoBehaviour
         if (hook.isFishOnHook && !hook.fishingRod.isHookOnRod)
         {
             fightCanvas.gameObject.SetActive(true);
-            StartMovingFish();
+            StartMovingFishUI();
         }
         else
         {
@@ -38,7 +38,7 @@ public class FightWithFish : MonoBehaviour
         }
     }
 
-    void StartMovingFish()
+    void StartMovingFishUI()
     {
         fishingWhell.transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * 10);
 
@@ -46,17 +46,11 @@ public class FightWithFish : MonoBehaviour
         {
             cooldown = Time.time + 2;
             selectTarget = Random.Range(0, 2);
+            moveSpeed = Random.Range(1.0f, hook.GetComponentInChildren<FishMovment>().fish.fishSize);
         }
 
-        if (selectTarget == 0)
-        {
-            fishRT.position = Vector2.MoveTowards(fishUI.transform.position, targetL.position, 100 * Time.deltaTime);
-        }
-        else
-        {
-            fishRT.position = Vector2.MoveTowards(fishUI.transform.position, targetR.position, 100 * Time.deltaTime);
-        }
-
-        fishUI.transform.Translate(Input.GetAxis("Horizontal") * 150 * Time.deltaTime, 0, 0);
+        fishRT.position = Vector2.MoveTowards(fishUI.transform.position, target[selectTarget].position, 75 * moveSpeed * Time.deltaTime);
+        
+        fishUI.transform.Translate(Input.GetAxis("Horizontal") * 200 * Time.deltaTime, 0, 0);
     }
 }

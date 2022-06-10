@@ -16,7 +16,6 @@ public class FishSprite : MonoBehaviour
     private void Update()
     {
         FlipSprite(fishMovment.Target);
-        //transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(fishMovment.target.y - transform.position.y, fishMovment.target.x - transform.position.x) * 2 * Mathf.PI);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

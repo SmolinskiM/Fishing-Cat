@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BiggerBait
   m_EditorClassIdentifier: Assembly-CSharp::BiggerBait
   description: Start with bigger bait
-  price: 100
+  price: 5000
   levelUpgrade: 0
   levelUpgradeMax: 1
   baitSize: 1

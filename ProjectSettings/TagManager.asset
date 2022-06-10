@@ -7,9 +7,9 @@ TagManager:
   - Water
   - Hook
   - Fish
-  - Red
-  - Green
-  - Undefined
+  - RollingFast
+  - RollingNormal
+  - Break
   layers:
   - Default
   - TransparentFX

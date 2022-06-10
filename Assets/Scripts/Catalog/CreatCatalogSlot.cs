@@ -30,16 +30,7 @@ public class CreatCatalogSlot : MonoBehaviour
 
         foreach (Fish fish in fishesSmall)
         {
-            fishName.text = fish.name;
-            fishValue.text = fish.value.ToString() + "$";
-            fishSprite.sprite = fish.fishSprite;
-            fishSprite.color = Color.white;
-            if (!fish.isDiscovered)
-            {
-                fishSprite.color = Color.black;
-                fishName.text = "???";
-                fishValue.text = "???";
-            }
+            SetUpSlot(fish);
 
             GameObject slotNew = Instantiate(slotPref, tabContentSmall.transform.position, Quaternion.identity);
             slotNew.GetComponent<Slot>().fish = fish;
@@ -48,16 +39,7 @@ public class CreatCatalogSlot : MonoBehaviour
 
         foreach (Fish fish in fishesMedium)
         {
-            fishName.text = fish.name;
-            fishValue.text = fish.value.ToString() + "$";
-            fishSprite.sprite = fish.fishSprite;
-            fishSprite.color = Color.white;
-            if (!fish.isDiscovered)
-            {
-                fishSprite.color = Color.black;
-                fishName.text = "???";
-                fishValue.text = "???";
-            }
+            SetUpSlot(fish);
 
             GameObject slotNew = Instantiate(slotPref, tabContentMedium.transform.position, Quaternion.identity);
             slotNew.GetComponent<Slot>().fish = fish;
@@ -66,20 +48,25 @@ public class CreatCatalogSlot : MonoBehaviour
 
         foreach (Fish fish in fishesLarge)
         {
-            fishName.text = fish.name;
-            fishValue.text = fish.value.ToString() + "$";
-            fishSprite.sprite = fish.fishSprite;
-            fishSprite.color = Color.white;
-            if (!fish.isDiscovered)
-            {
-                fishSprite.color = Color.black;
-                fishName.text = "???";
-                fishValue.text = "???";
-            }
+            SetUpSlot(fish);
 
             GameObject slotNew = Instantiate(slotPref, tabContentLarge.transform.position, Quaternion.identity);
             slotNew.GetComponent<Slot>().fish = fish;
             slotNew.transform.parent = tabContentLarge.transform;
+        }
+    }
+
+    private void SetUpSlot(Fish fish)
+    {
+        fishName.text = fish.name;
+        fishValue.text = fish.value.ToString() + "$";
+        fishSprite.sprite = fish.fishSprite;
+        fishSprite.color = Color.white;
+        if (!fish.isDiscovered)
+        {
+            fishSprite.color = Color.black;
+            fishName.text = "???";
+            fishValue.text = "???";
         }
     }
 }

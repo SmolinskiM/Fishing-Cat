@@ -13,24 +13,31 @@ public class FishMovment : MonoBehaviour
     public Transform area;
     
     private bool isReachPoint = true;
-    
+    private int range;
+    private int fishSpeed;
     private float positionX;
     private float positionY;
 
-    private Vector3 ofset;
     private Hook hook;
 
     void Start()
     {
-        ofset = new Vector3(0.14f, -1.1f, 0);
+        fishSpeed = 10;
+        range = 10;
         HookGo = GameObject.FindGameObjectWithTag("Hook");
         area = transform.parent;
         hook = HookGo.GetComponent<Hook>();
+        
     }
 
     void Update()
     {
-        if (gameObject.transform.position == new Vector3(positionX, positionY, 0))
+        if (isFishOnHook)
+        {
+            return;
+        }
+
+        if (transform.position == new Vector3(positionX, positionY, transform.position.z))
         {
             isReachPoint = true;
         }
@@ -44,12 +51,7 @@ public class FishMovment : MonoBehaviour
 
         float distanceToBait = Vector2.Distance(transform.position, hook.transform.position);
 
-        if(isFishOnHook)
-        {
-            return;
-        }
-
-        if(distanceToBait <= fish.range && hook.baitSize != 0 && hook.isHookInWater)
+        if(distanceToBait <= range && hook.baitSize != 0 && hook.isHookInWater)
         {
             Target = HookGo.transform.position;
         }
@@ -68,7 +70,7 @@ public class FishMovment : MonoBehaviour
             if (hook.baitSize >= fish.fishSize)
             {
                 transform.parent = HookGo.transform;
-                transform.position = HookGo.transform.position + ofset;
+                transform.position = HookGo.transform.position + fish.ofset;
                 hook.isFishOnHook = true;
                 isFishOnHook = true;
             }
@@ -78,6 +80,6 @@ public class FishMovment : MonoBehaviour
 
     void PointToFishTravel(Vector2 target)
     { 
-        transform.position = Vector2.MoveTowards(transform.position, target, 10 * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, fishSpeed * Time.deltaTime);
     }
 }

@@ -8,6 +8,7 @@ public class Hook : MonoBehaviour
     public bool isHookInWater;
     public int baitSize;
     public int baitSizeStart;
+    public int rollingUpSpeed;
 
     public FishingRod fishingRod;
     public DistanceJoint2D joint;
@@ -17,6 +18,7 @@ public class Hook : MonoBehaviour
 
     void Start()
     {
+        baitSize = baitSizeStart;
         rb = GetComponent<Rigidbody2D>();
         joint = GetComponent<DistanceJoint2D>();
     }
@@ -27,18 +29,16 @@ public class Hook : MonoBehaviour
         {
             if (baitSize == 0 && !isFishOnHook && !fishingRod.isHookOnRod)
             {
-                transform.position = Vector2.MoveTowards(transform.position, positionRod.position, 20 * Time.deltaTime);
-                joint.distance -= 20 * Time.deltaTime;
+                rollingUpSpeed = 20;
+                RollingUp(rollingUpSpeed);
+                return;
             }
-            else if (baitSize != 0 && !isFishOnHook && Input.GetKey(KeyCode.Mouse0) && !fishingRod.isHookOnRod)
+
+           if (baitSize != 0 && !isFishOnHook && Input.GetKey(KeyCode.Mouse0) && !fishingRod.isHookOnRod)
             {
-                transform.position = Vector2.MoveTowards(transform.position, positionRod.position, 2.5f * Time.deltaTime);
-                joint.distance -= 2.5f * Time.deltaTime;
-            }
-            else if (isFishOnHook && !fishingRod.isHookOnRod)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, positionRod.position, 10 * Time.deltaTime);
-                joint.distance -= 10 * Time.deltaTime;
+                rollingUpSpeed = 10;
+                RollingUp(rollingUpSpeed);
+                return;
             }
         }
     }
@@ -62,5 +62,11 @@ public class Hook : MonoBehaviour
             isHookInWater = false;
 
         }
+    }
+
+    public void RollingUp(int rollingUpSpeed)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, positionRod.position, rollingUpSpeed * Time.deltaTime);
+        joint.distance -= rollingUpSpeed * Time.deltaTime;
     }
 }

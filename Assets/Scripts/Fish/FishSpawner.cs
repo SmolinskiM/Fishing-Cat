@@ -32,6 +32,10 @@ public class FishSpawner : MonoBehaviour
         fishNew.transform.parent = gameObject.transform;
         fishMovment = fishNew.GetComponent<FishMovment>();
         fishMovment.fish = fish[fishRandom];
+        if(fishMovment.fish.fishSize == 3)
+        {
+            fishNew.transform.localScale *= 1.5f;
+        }
 
         fishNew.GetComponent<SpriteRenderer>().sprite = fish[fishRandom].fishSprite;
     }

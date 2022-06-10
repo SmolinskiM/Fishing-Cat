@@ -6,10 +6,9 @@ using UnityEngine;
 public class Fish : ScriptableObject
 {
     public bool isDiscovered;
-    public int fishId;
     public int fishSize;
     public int value;
-    public int range;
 
+    public Vector3 ofset;
     public Sprite fishSprite;
 }

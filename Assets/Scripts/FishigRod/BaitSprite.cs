@@ -25,10 +25,9 @@ public class BaitSprite : MonoBehaviour
         if(hook.baitSize < baitSprite.Length)
         {
             bait.sprite = baitSprite[hook.baitSize - 1];
+            return;
         }
-        else
-        {
-            bait.sprite = baitSprite[baitSprite.Length - 1];
-        }
+        
+        bait.sprite = baitSprite[baitSprite.Length - 1];
     }
 }
