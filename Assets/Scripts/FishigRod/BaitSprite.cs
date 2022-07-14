@@ -8,13 +8,13 @@ public class BaitSprite : MonoBehaviour
     private SpriteRenderer bait;
     [SerializeField] private Sprite[] baitSprite;
 
-    void Start()
+    private void Start()
     {
         hook = GetComponentInParent<Hook>();
         bait = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         if(hook.baitSize == 0)
         {

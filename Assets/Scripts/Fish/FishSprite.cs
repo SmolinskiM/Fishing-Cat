@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class FishSprite : MonoBehaviour
 {
-    private FishMovment fishMovment;
+    private FishMovement fishMovement;
     private SpriteRenderer fishSprite;
 
     private void Start()
     {
-        fishMovment = GetComponent<FishMovment>(); 
+        fishMovement = GetComponent<FishMovement>(); 
         fishSprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        FlipSprite(fishMovment.Target);
+        FlipSprite(fishMovement.Target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Hook"))
         {
-            if(fishMovment.isFishOnHook)
+            if(fishMovement.isFishOnHook)
             {
                 transform.eulerAngles = new Vector3(0, 0, -90);
                 fishSprite.flipX = false;
@@ -30,9 +30,9 @@ public class FishSprite : MonoBehaviour
         }
     }
 
-    void FlipSprite(Vector2 target)
+    private void FlipSprite(Vector2 target)
     {
-        if(!fishMovment.isFishOnHook)
+        if(!fishMovement.isFishOnHook)
         {
             if (target.x < transform.position.x)
             {

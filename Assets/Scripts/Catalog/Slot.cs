@@ -18,7 +18,7 @@ public class Slot : MonoBehaviour
         fishValue = transform.GetChild(2).GetComponent<Text>();
     }
 
-    void Update()
+    private void Update()
     {
         if(fish.isDiscovered)
         {

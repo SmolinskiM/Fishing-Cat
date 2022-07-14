@@ -6,14 +6,14 @@ public class FishSpawner : MonoBehaviour
 {
     private int fishCurrent;
     
-    private FishMovment fishMovment;
+    private FishMovement fishMovment;
     
     [SerializeField] private int fishMax;
-    
+
     [SerializeField] private Fish[] fish;
     [SerializeField] private GameObject fishPrefab;
 
-    void Update()
+    private void Update()
     {
         fishCurrent = transform.childCount;
 
@@ -27,10 +27,10 @@ public class FishSpawner : MonoBehaviour
         }
     }
 
-    void FishSetup(GameObject fishNew, int fishRandom)
+    private void FishSetup(GameObject fishNew, int fishRandom)
     {
         fishNew.transform.parent = gameObject.transform;
-        fishMovment = fishNew.GetComponent<FishMovment>();
+        fishMovment = fishNew.GetComponent<FishMovement>();
         fishMovment.fish = fish[fishRandom];
         if(fishMovment.fish.fishSize == 3)
         {

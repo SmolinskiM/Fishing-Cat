@@ -9,7 +9,7 @@ public class FishingRodUI : MonoBehaviour
 
     [SerializeField] private FishingRod fishingRod;
 
-    void Update()
+    private void Update()
     {
         if(!fishingRod.isThrowable)
         {

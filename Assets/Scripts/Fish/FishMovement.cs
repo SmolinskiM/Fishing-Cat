@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishMovment : MonoBehaviour
+public class FishMovement : MonoBehaviour
 {
     public Vector2 Target { get; private set; }
     public GameObject HookGo { get; private set; }
@@ -15,12 +15,12 @@ public class FishMovment : MonoBehaviour
     private bool isReachPoint = true;
     private int range;
     private int fishSpeed;
-    private float positionX;
-    private float positionY;
+    private float targetPositionX;
+    private float targetPositionY;
 
     private Hook hook;
 
-    void Start()
+    private void Start()
     {
         fishSpeed = 10;
         range = 10;
@@ -30,22 +30,22 @@ public class FishMovment : MonoBehaviour
         
     }
 
-    void Update()
+    private void Update()
     {
         if (isFishOnHook)
         {
             return;
         }
 
-        if (transform.position == new Vector3(positionX, positionY, transform.position.z))
+        if (transform.position == new Vector3(targetPositionX, targetPositionY, transform.position.z))
         {
             isReachPoint = true;
         }
 
         if (isReachPoint)
         {
-            positionX = Random.Range(area.transform.position.x - area.transform.localScale.x / 2, area.transform.position.x + area.transform.localScale.x / 2);
-            positionY = Random.Range(area.transform.position.y - area.transform.localScale.y / 2, area.transform.position.y + area.transform.localScale.y / 2);
+            targetPositionX = Random.Range(area.transform.position.x - area.transform.localScale.x / 2, area.transform.position.x + area.transform.localScale.x / 2);
+            targetPositionY = Random.Range(area.transform.position.y - area.transform.localScale.y / 2, area.transform.position.y + area.transform.localScale.y / 2);
             isReachPoint = false;
         }
 
@@ -57,7 +57,7 @@ public class FishMovment : MonoBehaviour
         }
         else
         {
-            Target = new Vector2(positionX, positionY);
+            Target = new Vector2(targetPositionX, targetPositionY);
         }
 
         PointToFishTravel(Target);
@@ -78,7 +78,7 @@ public class FishMovment : MonoBehaviour
         }
     }
 
-    void PointToFishTravel(Vector2 target)
+    private void PointToFishTravel(Vector2 target)
     { 
         transform.position = Vector2.MoveTowards(transform.position, target, fishSpeed * Time.deltaTime);
     }

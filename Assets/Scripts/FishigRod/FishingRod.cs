@@ -33,13 +33,13 @@ public class FishingRod : MonoBehaviour
         money = moneyBag.money;
     }
 
-    void Start()
+    private void Start()
     {
         isHookOnRod = true;
         MaxPower = 5;
     }
 
-    void Update()
+    private void Update()
     {
         EnableTrowHook();
         moneyBag.money = money;
@@ -86,7 +86,7 @@ public class FishingRod : MonoBehaviour
         }
     }
 
-    void TrowHook(float power)
+    private void TrowHook(float power)
     {
         if (power > MaxPower)
         {
@@ -103,7 +103,7 @@ public class FishingRod : MonoBehaviour
         hookRb.AddForce(new Vector2(300, 100) * power);
     }
 
-    void DrawRope()
+    private void DrawRope()
     {
         lr.SetPosition(0, pointRod.position);
         lr.SetPosition(1, pointHook.position);

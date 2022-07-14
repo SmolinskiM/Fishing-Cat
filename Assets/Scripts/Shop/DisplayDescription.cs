@@ -38,7 +38,7 @@ public class DisplayDescription: MonoBehaviour, IPointerEnterHandler, IPointerEx
         TextOnMouse();
     }
 
-    void TextOnMouse()
+    private void TextOnMouse()
     {
         ofset = new Vector3(rectTransform.rect.width /2 + 10, 0, 0);
         descriptionText.text = upgrades.description;

@@ -1,56 +1,70 @@
 ﻿using UnityEngine;
 
 public class FightWithFish : MonoBehaviour
-{
+{ 
+    public float FishPosition { get; private set; } = 0;
+    
+    public float moveSpeed;
+    public float fastArea;
+    public float breakArea;
+    
     [SerializeField] private Hook hook;
-    [SerializeField] private Canvas fightCanvas;
-    [SerializeField] private GameObject fishingWhell;
-    [SerializeField] private Transform fishUI;
-    [SerializeField] private Transform[] target;
-    [SerializeField] private RectTransform fishDeafultPoint;
-
-
-    private int selectTarget;
+    [SerializeField] private Canvas figthCnvas;
+    private FishMovement fishMovement;
+    private int direction;
+    private float moveSpeedFishUI;
     private float cooldown;
-    private float moveSpeed;
-    private RectTransform fishRT;
 
     private void Start()
     {
-        fishRT = fishUI.gameObject.GetComponent<RectTransform>();
-    }
-    void Update()
-    {
-        ActiveCanvas();
+        cooldown = 2;
+        moveSpeedFishUI = 50;
     }
 
-    void ActiveCanvas()
+    private void Update()
     {
         if (hook.isFishOnHook && !hook.fishingRod.isHookOnRod)
         {
-            fightCanvas.gameObject.SetActive(true);
-            StartMovingFishUI();
+            fishMovement = hook.GetComponentInChildren<FishMovement>();
+            Fight();
+            figthCnvas.gameObject.SetActive(true);
         }
         else
         {
-            fishRT.position = fishDeafultPoint.position;
-            fightCanvas.gameObject.SetActive(false);
+            FishPosition = 0;
+            figthCnvas.gameObject.SetActive(false);
         }
     }
 
-    void StartMovingFishUI()
+    private void Fight()
     {
-        fishingWhell.transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * 10);
+        if(Mathf.Abs(FishPosition) <= fastArea)
+        {
+            hook.RollingUp(moveSpeed * 1.5f);
+        }
+        else
+        {
+            hook.RollingUp(moveSpeed);
+        }
+
+        if(Mathf.Abs(FishPosition) >= breakArea)
+        {
+            FishMovement fishMovment;
+
+            fishMovment = hook.GetComponentInChildren<FishMovement>();
+            hook.isFishOnHook = false;
+            fishMovment.isFishOnHook = false;
+            fishMovment.transform.eulerAngles = Vector3.zero;
+            fishMovment.transform.parent = fishMovment.area;
+        }
 
         if (Time.time >= cooldown)
         {
             cooldown = Time.time + 2;
-            selectTarget = Random.Range(0, 2);
-            moveSpeed = Random.Range(1.0f, hook.GetComponentInChildren<FishMovment>().fish.fishSize);
+            direction = Random.Range(0, 2) * 2 - 1;
         }
 
-        fishRT.position = Vector2.MoveTowards(fishUI.transform.position, target[selectTarget].position, 75 * moveSpeed * Time.deltaTime);
-        
-        fishUI.transform.Translate(Input.GetAxis("Horizontal") * 200 * Time.deltaTime, 0, 0);
+        FishPosition += (moveSpeedFishUI * fishMovement.fish.fishSize * direction) * Time.deltaTime;
+        FishPosition += Input.GetAxis("Horizontal") * 200 * Time.deltaTime;
     }
 }

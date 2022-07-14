@@ -15,7 +15,7 @@ public class ShopUI : MonoBehaviour
         upgradePrice.text = upgrades.price.ToString() + "$";
     }
 
-    void Update()
+    private void Update()
     {
         if(upgrades.levelUpgrade == 0)
         {

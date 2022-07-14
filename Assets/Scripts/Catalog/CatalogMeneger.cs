@@ -15,7 +15,7 @@ public class CatalogMeneger : MonoBehaviour
         fishCatalog.gameObject.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         if(!fishingRod.isHookOnRod)
         {

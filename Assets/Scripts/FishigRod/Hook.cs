@@ -16,14 +16,14 @@ public class Hook : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private Transform positionRod;
 
-    void Start()
+    private void Start()
     {
         baitSize = baitSizeStart;
         rb = GetComponent<Rigidbody2D>();
         joint = GetComponent<DistanceJoint2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if(isHookInWater)
         {
@@ -64,7 +64,7 @@ public class Hook : MonoBehaviour
         }
     }
 
-    public void RollingUp(int rollingUpSpeed)
+    public void RollingUp(float rollingUpSpeed)
     {
         transform.position = Vector2.MoveTowards(transform.position, positionRod.position, rollingUpSpeed * Time.deltaTime);
         joint.distance -= rollingUpSpeed * Time.deltaTime;

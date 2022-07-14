@@ -16,7 +16,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private Button biggerBaitButton;
 
-    void Start()
+    private void Start()
     {
         biggerBaitButton.onClick.AddListener(BiggerBait);
         fishingLineLengthButton.onClick.AddListener(FishingLineLengthUpgrade);

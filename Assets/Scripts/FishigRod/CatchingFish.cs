@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class CatchingFish: MonoBehaviour
 {   
-    private FishMovment fish;
+    private FishMovement fish;
     private FishingRod fishingRod;
 
     [SerializeField] private Canvas whatToDoWithFish;
@@ -20,7 +20,7 @@ public class CatchingFish: MonoBehaviour
         moneyText.text = fishingRod.money.ToString() + "$";
     }
 
-    void Update()
+    private void Update()
     {
         moneyText.gameObject.SetActive(fishingRod.isHookOnRod);
 
@@ -36,7 +36,7 @@ public class CatchingFish: MonoBehaviour
 
     public void SellFish()
     {
-        fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovment>();
+        fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovement>();
         fishingRod.money += fish.fish.value;
         moneyText.text = fishingRod.money.ToString() + "$";
         fishingRod.hook.isFishOnHook = false;
@@ -46,7 +46,7 @@ public class CatchingFish: MonoBehaviour
 
     public void MakeBait()
     {
-        fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovment>();
+        fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovement>();
         fishingRod.hook.baitSize = fish.fish.fishSize + 1;
         fishingRod.hook.isFishOnHook = false;
         fish.fish.isDiscovered = true;

@@ -8,12 +8,12 @@ public class DisplayDescriptionChecker : MonoBehaviour
     private DisplayDescription[] displayDescriptions;
     [SerializeField] private Image descriptionBg;
 
-    void Start()
+    private void Start()
     {
         displayDescriptions = GetComponentsInChildren<DisplayDescription>();
     }
 
-    void Update()
+    private void Update()
     {
         foreach(DisplayDescription displayDescription in displayDescriptions)
         {

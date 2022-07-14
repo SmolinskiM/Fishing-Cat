@@ -13,31 +13,31 @@ public class TabCatalogMeneger : MonoBehaviour
     [SerializeField] private GameObject tabContentMedium;
     [SerializeField] private GameObject tabContentLarge;
 
-    void Start()
+    private void Start()
     {
         tabSmall.onClick.AddListener(ShowTabSmall);
         tabMedium.onClick.AddListener(ShowTabMedium);
         tabLarge.onClick.AddListener(ShowTabLarge);
     }
 
-    void HideAllTabs()
+    private void HideAllTabs()
     {
         tabContentSmall.SetActive(false);
         tabContentMedium.SetActive(false);
         tabContentLarge.SetActive(false);
     }
 
-    void ShowTabSmall()
+    private void ShowTabSmall()
     {
         HideAllTabs();
         tabContentSmall.SetActive(true);
     }
-    void ShowTabMedium()
+    private void ShowTabMedium()
     {
         HideAllTabs();
         tabContentMedium.SetActive(true);
     }
-    void ShowTabLarge()
+    private void ShowTabLarge()
     {
         HideAllTabs();
         tabContentLarge.SetActive(true);

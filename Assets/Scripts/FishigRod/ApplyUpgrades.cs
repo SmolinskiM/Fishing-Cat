@@ -10,7 +10,7 @@ public class ApplyUpgrades : MonoBehaviour
     [SerializeField] private FishingLineLength fishingLineLength;
     [SerializeField] private BiggerBait biggerBait;
 
-    void Awake()
+    private void Awake()
     {
         fishingRod.maxDistance += fishingLineLength.maxDistance * fishingLineLength.levelUpgrade;
         hook.baitSizeStart += biggerBait.baitSize * biggerBait.levelUpgrade;

@@ -18,7 +18,7 @@ public class CreatCatalogSlot : MonoBehaviour
     [SerializeField] private GameObject tabContentMedium;
     [SerializeField] private GameObject tabContentLarge;
 
-    void Start()
+    private void Start()
     {
         fishesSmall = Resources.LoadAll<Fish>("Fishes/Small");
         fishesMedium = Resources.LoadAll<Fish>("Fishes/Medium");
