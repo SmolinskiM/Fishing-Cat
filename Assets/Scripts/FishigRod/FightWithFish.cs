@@ -1,38 +1,35 @@
 ﻿using UnityEngine;
 
 public class FightWithFish : MonoBehaviour
-{ 
-    public float FishPosition { get; private set; } = 0;
+{
     
     public float moveSpeed;
     public float fastArea;
     public float breakArea;
     
     [SerializeField] private Hook hook;
-    [SerializeField] private Canvas figthCnvas;
-    private FishMovement fishMovement;
+    [SerializeField] private GameObject figthCanvas;
+    
+    private Fish fish;
     private int direction;
-    private float moveSpeedFishUI;
-    private float cooldown;
-
-    private void Start()
-    {
-        cooldown = 2;
-        moveSpeedFishUI = 50;
-    }
+    private readonly float moveSpeedFishUI = 50;
+    private float fishPosition = 0;
+    private float cooldown = 2;
+    
+    public float FishPosition { get { return fishPosition; } }
 
     private void Update()
     {
         if (hook.isFishOnHook && !hook.fishingRod.isHookOnRod)
         {
-            fishMovement = hook.GetComponentInChildren<FishMovement>();
+            fish = hook.GetComponentInChildren<Fish>();
             Fight();
-            figthCnvas.gameObject.SetActive(true);
+            figthCanvas.SetActive(true);
         }
         else
         {
-            FishPosition = 0;
-            figthCnvas.gameObject.SetActive(false);
+            fishPosition = 0;
+            figthCanvas.SetActive(false);
         }
     }
 
@@ -64,7 +61,7 @@ public class FightWithFish : MonoBehaviour
             direction = Random.Range(0, 2) * 2 - 1;
         }
 
-        FishPosition += (moveSpeedFishUI * fishMovement.fish.fishSize * direction) * Time.deltaTime;
-        FishPosition += Input.GetAxis("Horizontal") * 200 * Time.deltaTime;
+        fishPosition += (moveSpeedFishUI * (int)fish.FishCurrent.fishSize * direction) * Time.deltaTime;
+        fishPosition += Input.GetAxis("Horizontal") * 200 * Time.deltaTime;
     }
 }

@@ -21,6 +21,5 @@ public class FishingRodUI : MonoBehaviour
         }
 
         powerBar.value = (Time.time - fishingRod.PressTimeStart) / fishingRod.MaxPower;
-
     }
 }

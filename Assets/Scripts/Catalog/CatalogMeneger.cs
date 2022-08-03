@@ -3,30 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CatalogMeneger : MonoBehaviour
-{
-    [SerializeField] private FishingRod fishingRod;
-    
-    [SerializeField] private Canvas fishCatalog;
+{    
+    [SerializeField] private GameObject fishCatalog;
 
     public bool isEnableToOpen;
 
     private void Start()
     {
-        fishCatalog.gameObject.SetActive(false);
+        fishCatalog.SetActive(false);
     }
 
     private void Update()
     {
-        if(!fishingRod.isHookOnRod)
+        
+        if(!FishingRod.Instance.isHookOnRod)
         {
             return;
         }
 
-        if(!Input.GetKeyDown(KeyCode.Tab))
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
-            return;
+            isEnableToOpen = !isEnableToOpen;
+            fishCatalog.SetActive(isEnableToOpen);
         }
-        isEnableToOpen = !isEnableToOpen;
-        fishCatalog.gameObject.SetActive(isEnableToOpen);
     }
 }

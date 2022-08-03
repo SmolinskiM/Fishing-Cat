@@ -4,30 +4,29 @@ using UnityEngine;
 
 public class FishMovement : MonoBehaviour
 {
-    public Vector2 Target { get; private set; }
-    public GameObject HookGo { get; private set; }
-    
     public bool isFishOnHook;
 
-    public Fish fish;
     public Transform area;
     
+    [SerializeField] private Hook hook;
+    [SerializeField] private Fish fish;
+
     private bool isReachPoint = true;
-    private int range;
-    private int fishSpeed;
+    private const int range = 10;
+    private const int fishSpeed = 10;
     private float targetPositionX;
     private float targetPositionY;
+    
+    private Vector2 target;
+    
+    public Vector2 Target { get { return target; } }
 
-    private Hook hook;
 
     private void Start()
     {
-        fishSpeed = 10;
-        range = 10;
-        HookGo = GameObject.FindGameObjectWithTag("Hook");
+        hook = FindObjectOfType<Hook>();
+        fish = GetComponent<Fish>();
         area = transform.parent;
-        hook = HookGo.GetComponent<Hook>();
-        
     }
 
     private void Update()
@@ -51,30 +50,30 @@ public class FishMovement : MonoBehaviour
 
         float distanceToBait = Vector2.Distance(transform.position, hook.transform.position);
 
-        if(distanceToBait <= range && hook.baitSize != 0 && hook.isHookInWater)
+        if(distanceToBait <= range && hook.bait.baitSize != 0 && hook.isHookInWater)
         {
-            Target = HookGo.transform.position;
+            target = hook.transform.position;
         }
         else
         {
-            Target = new Vector2(targetPositionX, targetPositionY);
+            target = new Vector2(targetPositionX, targetPositionY);
         }
 
-        PointToFishTravel(Target);
+        PointToFishTravel(target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Hook"))
         {
-            if (hook.baitSize >= fish.fishSize)
+            if (hook.bait.baitSize >= (int)fish.FishCurrent.fishSize)
             {
-                transform.parent = HookGo.transform;
-                transform.position = HookGo.transform.position + fish.ofset;
+                transform.parent = hook.transform;
+                transform.position = hook.transform.position + fish.FishCurrent.ofset;
                 hook.isFishOnHook = true;
                 isFishOnHook = true;
             }
-            hook.baitSize = 0;
+            hook.bait.baitSize = 0;
         }
     }
 

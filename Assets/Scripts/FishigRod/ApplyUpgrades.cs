@@ -7,12 +7,20 @@ public class ApplyUpgrades : MonoBehaviour
     [SerializeField] private Hook hook;
     [SerializeField] private FishingRod fishingRod;
 
-    [SerializeField] private FishingLineLength fishingLineLength;
-    [SerializeField] private BiggerBait biggerBait;
+    [SerializeField] private List<Upgrades> upgrades;
 
     private void Awake()
     {
-        fishingRod.maxDistance += fishingLineLength.maxDistance * fishingLineLength.levelUpgrade;
-        hook.baitSizeStart += biggerBait.baitSize * biggerBait.levelUpgrade;
+        foreach(Upgrades upgrade in upgrades)
+        {
+            if(upgrade is FishingLineLength fishingLineLength)
+            {
+                fishingRod.maxDistance += fishingLineLength.maxDistance * fishingLineLength.levelUpgrade;
+            }
+            else if(upgrade is BiggerBait biggerBait)
+            {
+                hook.bait.baitSizeStart += biggerBait.baitSize * biggerBait.levelUpgrade;
+            }
+        }
     }
 }

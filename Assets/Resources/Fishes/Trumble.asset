@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd404f95c36a194c8b8387eea0b4dfb, type: 3}
-  m_Name: Cuddlefish
+  m_Script: {fileID: 11500000, guid: eda8e0a7df845454c8862c20f6b27234, type: 3}
+  m_Name: Trumble
   m_EditorClassIdentifier: 
   isDiscovered: 0
-  fishSize: 1
-  value: 20
-  ofset: {x: 0.261, y: -0.639, z: 0}
-  fishSprite: {fileID: 21300000, guid: 383551baaeeac174dbad463ab8437c36, type: 3}
+  value: 0
+  fishSize: 3
+  ofset: {x: 0, y: 0, z: 0}
+  fishSprite: {fileID: 21300000, guid: 6cbc970f19a142048960bdb756a912e2, type: 3}

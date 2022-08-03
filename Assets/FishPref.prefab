@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8634638322119052574}
   - component: {fileID: -7436121340693234719}
+  - component: {fileID: 3961077801025956262}
   - component: {fileID: 8394534632070663172}
   - component: {fileID: -3906592158421117810}
   - component: {fileID: -905381901695055853}
   m_Layer: 0
   m_Name: FishPref
-  m_TagString: Untagged
+  m_TagString: Hook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3961077801025956262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357610905652248983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79a84c6530883546881b9f1bb8fcc9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fish: {fileID: 0}
 --- !u!114 &8394534632070663172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,11 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFishOnHook: 0
-  fishId: 1
-  fishSize: 1
-  value: 10
-  range: 10
   area: {fileID: 0}
+  hook: {fileID: 0}
+  fish: {fileID: 0}
 --- !u!114 &-3906592158421117810
 MonoBehaviour:
   m_ObjectHideFlags: 0

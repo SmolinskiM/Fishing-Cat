@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class DisplayDescriptionChecker : MonoBehaviour
 {
-    private DisplayDescription[] displayDescriptions;
     [SerializeField] private Image descriptionBg;
+    private DisplayDescription[] displayDescriptions;
 
     private void Start()
     {

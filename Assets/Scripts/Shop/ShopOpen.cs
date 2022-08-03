@@ -5,9 +5,8 @@ public class ShopOpen : MonoBehaviour
 {
     public bool isShopOpen;
 
-    [SerializeField] private FishingRod fishingRod;
     [SerializeField] private Text shopText;
-    [SerializeField] private Canvas shop;
+    [SerializeField] private GameObject shop;
 
     private void Update()
     {
@@ -16,19 +15,19 @@ public class ShopOpen : MonoBehaviour
 
     private void OpenShop()
     {
-        if (fishingRod.isHookOnRod)
+        if (FishingRod.Instance.isHookOnRod)
         {
             if (Input.GetKeyDown("p"))
             {
                 isShopOpen = !isShopOpen;
-                shop.gameObject.SetActive(isShopOpen);
+                shop.SetActive(isShopOpen);
             }
             shopText.gameObject.SetActive(!isShopOpen);
         }
         else
         {
             isShopOpen = false;
-            shop.gameObject.SetActive(isShopOpen);
+            shop.SetActive(isShopOpen);
             shopText.gameObject.SetActive(isShopOpen);
         }
     }

@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Fish", menuName = "Fish")]
-public class Fish : ScriptableObject
+public class Fish : MonoBehaviour
 {
-    public bool isDiscovered;
-    public int fishSize;
-    public int value;
+    [SerializeField] private FishData fish;
 
-    public Vector3 ofset;
-    public Sprite fishSprite;
+    public FishData FishCurrent { get { return fish; } }
+
+    public void FishSetup(FishData fish, Transform spawner)
+    {
+        this.fish = fish;
+        transform.parent = spawner;
+        if ((int)fish.fishSize == 3)
+        {
+            transform.localScale *= 1.5f;
+        }
+
+        GetComponent<SpriteRenderer>().sprite = fish.fishSprite;
+    }
 }

@@ -9,37 +9,61 @@ public class TabCatalogMeneger : MonoBehaviour
     [SerializeField] private Button tabMedium;
     [SerializeField] private Button tabLarge;
 
-    [SerializeField] private GameObject tabContentSmall;
-    [SerializeField] private GameObject tabContentMedium;
-    [SerializeField] private GameObject tabContentLarge;
+    [SerializeField] private GameObject content;
+
+    public Slot[] slots;
+
+    enum SizeContent
+    {
+        Small = 1,
+        Medium,
+        Large
+    }
 
     private void Start()
     {
-        tabSmall.onClick.AddListener(ShowTabSmall);
-        tabMedium.onClick.AddListener(ShowTabMedium);
-        tabLarge.onClick.AddListener(ShowTabLarge);
+        slots = content.GetComponentsInChildren<Slot>();
+        tabSmall.onClick.AddListener(ClickTabSmal);
+        tabMedium.onClick.AddListener(ClickTabMedium);
+        tabLarge.onClick.AddListener(ClickTabLarge);
+        HideContent();
+        ClickTabSmal();
     }
 
-    private void HideAllTabs()
+    private void ClickTabSmal()
     {
-        tabContentSmall.SetActive(false);
-        tabContentMedium.SetActive(false);
-        tabContentLarge.SetActive(false);
+        HideContent();
+        ChangeContent((int)SizeContent.Small);
     }
 
-    private void ShowTabSmall()
+    private void ClickTabMedium()
     {
-        HideAllTabs();
-        tabContentSmall.SetActive(true);
+        HideContent();
+        ChangeContent((int)SizeContent.Medium);
     }
-    private void ShowTabMedium()
+
+    private void ClickTabLarge()
     {
-        HideAllTabs();
-        tabContentMedium.SetActive(true);
+        HideContent();
+        ChangeContent((int)SizeContent.Large);
     }
-    private void ShowTabLarge()
+
+    private void ChangeContent(int sizeContent)
     {
-        HideAllTabs();
-        tabContentLarge.SetActive(true);
+        foreach(Slot slot in slots)
+        {
+            if((int)slot.fish.fishSize == sizeContent)
+            {
+                slot.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void HideContent()
+    {
+        foreach(Slot slot in slots)
+        {
+            slot.gameObject.SetActive(false);
+        }
     }
 }

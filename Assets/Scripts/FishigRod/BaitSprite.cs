@@ -16,15 +16,15 @@ public class BaitSprite : MonoBehaviour
 
     private void Update()
     {
-        if(hook.baitSize == 0)
+        if(hook.bait.baitSize == 0)
         {
             bait.sprite = null;
             return;
         }
 
-        if(hook.baitSize < baitSprite.Length)
+        if(hook.bait.baitSize < baitSprite.Length)
         {
-            bait.sprite = baitSprite[hook.baitSize - 1];
+            bait.sprite = baitSprite[hook.bait.baitSize - 1];
             return;
         }
         

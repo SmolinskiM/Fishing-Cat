@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FightWithFishUI : MonoBehaviour
 {
-    private RectTransform fishUI;
     [SerializeField] private FightWithFish fightWithFish;
     [SerializeField] private Transform fishingWheel;
+    
+    private RectTransform fishUI;
 
     private void Start()
     {

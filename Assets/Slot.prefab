@@ -53,6 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fish: {fileID: 0}
+  fishName: {fileID: 797983685045779384}
+  fishValue: {fileID: 224397212281259195}
+  fishSprite: {fileID: 3701555342666242553}
 --- !u!1 &3398060692569345183
 GameObject:
   m_ObjectHideFlags: 0

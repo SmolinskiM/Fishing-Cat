@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class CatchingFish: MonoBehaviour
 {   
-    private FishMovement fish;
+    private Fish fish;
     private FishingRod fishingRod;
 
-    [SerializeField] private Canvas whatToDoWithFish;
+    [SerializeField] private GameObject whatToDoWithFish;
     [SerializeField] private Text moneyText;
 
     [SerializeField] private Button makeBait;
@@ -17,7 +17,7 @@ public class CatchingFish: MonoBehaviour
         makeBait.onClick.AddListener(MakeBait);
         sellFish.onClick.AddListener(SellFish);
         fishingRod = GetComponent<FishingRod>();
-        moneyText.text = fishingRod.money.ToString() + "$";
+        moneyText.text = Money.Instance.MoneyHaving.ToString() + "$";
     }
 
     private void Update()
@@ -26,30 +26,30 @@ public class CatchingFish: MonoBehaviour
 
         if(fishingRod.isHookOnRod && fishingRod.hook.isFishOnHook)
         {
-            whatToDoWithFish.gameObject.SetActive(true);
+            whatToDoWithFish.SetActive(true);
         }
         else
         {
-            whatToDoWithFish.gameObject.SetActive(false);
+            whatToDoWithFish.SetActive(false);
         }
     }
 
     public void SellFish()
     {
-        fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovement>();
-        fishingRod.money += fish.fish.value;
-        moneyText.text = fishingRod.money.ToString() + "$";
+        fish = fishingRod.hook.gameObject.GetComponentInChildren<Fish>();
+        Money.Instance.AddMoney(fish.FishCurrent.value);
+        moneyText.text = Money.Instance.MoneyHaving.ToString() + "$";
         fishingRod.hook.isFishOnHook = false;
-        fish.fish.isDiscovered = true;
+        fish.FishCurrent.isDiscovered = true;
         Destroy(fish.gameObject);
     }
 
     public void MakeBait()
     {
-        fish = fishingRod.hook.gameObject.GetComponentInChildren<FishMovement>();
-        fishingRod.hook.baitSize = fish.fish.fishSize + 1;
+        fish = fishingRod.hook.gameObject.GetComponentInChildren<Fish>();
+        fishingRod.hook.bait.baitSize = (int)fish.FishCurrent.fishSize + 1;
         fishingRod.hook.isFishOnHook = false;
-        fish.fish.isDiscovered = true;
+        fish.FishCurrent.isDiscovered = true;
         Destroy(fish.gameObject);
     }
 }

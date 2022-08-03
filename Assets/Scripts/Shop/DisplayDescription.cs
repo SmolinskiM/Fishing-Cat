@@ -7,9 +7,11 @@ using UnityEngine.EventSystems;
 public class DisplayDescription: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool isMouseOn;
+    
     [SerializeField] private Text descriptionText;
     [SerializeField] private Image descriptionBg;
     [SerializeField] private Upgrades upgrades;
+    
     private Vector3 ofset;
     private RectTransform rectTransform;
 

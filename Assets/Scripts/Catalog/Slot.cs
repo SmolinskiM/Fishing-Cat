@@ -5,18 +5,11 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-    public Fish fish;
-
-    private Text fishName;
-    private Text fishValue;
-    private Image fishSprite;
-
-    private void Start()
-    {
-        fishSprite = transform.GetChild(0).GetComponent<Image>();
-        fishName = transform.GetChild(1).GetComponent<Text>();
-        fishValue = transform.GetChild(2).GetComponent<Text>();
-    }
+    public FishData fish;
+    
+    [SerializeField] private Text fishName;
+    [SerializeField] private Text fishValue;
+    [SerializeField] private Image fishSprite;
 
     private void Update()
     {
@@ -27,6 +20,20 @@ public class Slot : MonoBehaviour
             fishSprite.sprite = fish.fishSprite;
             fishSprite.color = Color.white;
             Destroy(GetComponent<Slot>());
+        }
+    }
+
+    public void SetUpSlot(FishData fish)
+    {
+        fishName.text = fish.name;
+        fishValue.text = fish.value.ToString() + "$";
+        fishSprite.sprite = fish.fishSprite;
+        fishSprite.color = Color.white;
+        if (!fish.isDiscovered)
+        {
+            fishSprite.color = Color.black;
+            fishName.text = "???";
+            fishValue.text = "???";
         }
     }
 }

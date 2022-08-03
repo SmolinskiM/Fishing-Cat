@@ -6,19 +6,22 @@ public class Hook : MonoBehaviour
 {
     public bool isFishOnHook;
     public bool isHookInWater;
-    public int baitSize;
-    public int baitSizeStart;
     public int rollingUpSpeed;
 
+    public Bait bait;
     public FishingRod fishingRod;
     public DistanceJoint2D joint;
     
-    private Rigidbody2D rb;
+    [SerializeField] private GameObject water;
     [SerializeField] private Transform positionRod;
+
+    private string waterTag;
+    
+    private Rigidbody2D rb;
 
     private void Start()
     {
-        baitSize = baitSizeStart;
+        waterTag = water.tag;
         rb = GetComponent<Rigidbody2D>();
         joint = GetComponent<DistanceJoint2D>();
     }
@@ -27,31 +30,31 @@ public class Hook : MonoBehaviour
     {
         if(isHookInWater)
         {
-            if (baitSize == 0 && !isFishOnHook && !fishingRod.isHookOnRod)
+            if (bait.baitSize == 0 && !isFishOnHook && !fishingRod.isHookOnRod)
             {
                 rollingUpSpeed = 20;
                 RollingUp(rollingUpSpeed);
                 return;
             }
 
-           if (baitSize != 0 && !isFishOnHook && Input.GetKey(KeyCode.Mouse0) && !fishingRod.isHookOnRod)
-            {
+           if (bait.baitSize != 0 && !isFishOnHook && Input.GetKey(KeyCode.Mouse0) && !fishingRod.isHookOnRod)
+           {
                 rollingUpSpeed = 10;
                 RollingUp(rollingUpSpeed);
                 return;
-            }
+           }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Water"))
+        if (collision.CompareTag(waterTag))
         {
             isHookInWater = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Water"))
+        if (collision.CompareTag(waterTag))
         {
             transform.position = positionRod.position;
             rb.gravityScale = 0;

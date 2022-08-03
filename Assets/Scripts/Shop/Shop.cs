@@ -10,11 +10,11 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private FishingLineLength fishingLineLength;
 
+    [SerializeField] private Button biggerBaitButton;
     [SerializeField] private Button fishingLineLengthButton;
 
     [SerializeField] private BiggerBait biggerBait;
 
-    [SerializeField] private Button biggerBaitButton;
 
     private void Start()
     {
@@ -24,38 +24,32 @@ public class Shop : MonoBehaviour
 
     private void FishingLineLengthUpgrade()
     {
-        if(fishingRod.money < fishingLineLength.price)
-        {
-            return;
-        }
-
         if(fishingLineLength.levelUpgrade == fishingLineLength.levelUpgradeMax)
         {
             return;
         }
 
-        fishingRod.money -= fishingLineLength.price;
-        moneyText.text = fishingRod.money.ToString() + "$";
-        fishingRod.maxDistance += fishingLineLength.maxDistance;
-        fishingLineLength.levelUpgrade++;
+        if(Money.Instance.SubtractMoney(fishingLineLength.price))
+        {
+            moneyText.text = Money.Instance.MoneyHaving.ToString() + "$";
+            fishingRod.maxDistance += fishingLineLength.maxDistance;
+            fishingLineLength.levelUpgrade++;
+        }
     }
 
     private void BiggerBait()
     {
-        if (fishingRod.money < biggerBait.price)
-        {
-            return;
-        }
-
         if (biggerBait.levelUpgrade == biggerBait.levelUpgradeMax)
         {
             return;
         }
 
-        fishingRod.money -= biggerBait.price;
-        moneyText.text = fishingRod.money.ToString() + "$";
-        hook.baitSizeStart += biggerBait.baitSize;
-        hook.baitSize += biggerBait.baitSize;
-        biggerBait.levelUpgrade++;
+        if(Money.Instance.SubtractMoney(biggerBait.price))
+        {
+            moneyText.text = Money.Instance.MoneyHaving.ToString() + "$";
+            hook.bait.baitSizeStart += biggerBait.baitSize;
+            hook.bait.baitSize += biggerBait.baitSize;
+            biggerBait.levelUpgrade++;
+        }
     }
 }
